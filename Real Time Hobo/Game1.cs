@@ -46,7 +46,7 @@ namespace Real_Time_Hobo
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
        
-            m_mockMenu = Content.Load<Texture2D>("MockMenu");
+            m_mockMenu = Content.Load<Texture2D>("Menu Sprites/MockMenu");
         }
 
         /// <summary>

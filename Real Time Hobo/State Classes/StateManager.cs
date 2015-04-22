@@ -13,11 +13,11 @@ namespace Real_Time_Hobo
         /// <summary>
         /// Updates the current state
         /// </summary>
-        public void Update();
+        void Update();
         /// <summary>
         /// Draws the current state
         /// </summary>
-        public void Draw();
+        void Draw();
     }
     class StateManager
     {
@@ -69,7 +69,7 @@ namespace Real_Time_Hobo
         /// <summary>
         /// Clears the stack of all states currently on it
         /// </summary>
-        public static ~StateManager()
+        ~StateManager()
         {
             GameManager.Clear();
         }
