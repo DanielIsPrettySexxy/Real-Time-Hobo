@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Real_Time_Hobo.State_Classes;
 
 namespace Real_Time_Hobo
 {
@@ -10,10 +11,12 @@ namespace Real_Time_Hobo
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
+        MenuState menuState;
 
         private Texture2D m_mockMenu;
 
+        
         public Game1()
             : base()
         {
@@ -23,6 +26,10 @@ namespace Real_Time_Hobo
             graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 720;
             graphics.ApplyChanges();
+            StateManager.Initalise();
+
+            menuState = new MenuState(this);
+            StateManager.Push(menuState);
 
         }
 
@@ -45,7 +52,7 @@ namespace Real_Time_Hobo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-       
+            menuState.LoadContent();
             m_mockMenu = Content.Load<Texture2D>("Menu Sprites/MockMenu");
         }
 
@@ -87,7 +94,7 @@ namespace Real_Time_Hobo
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(m_mockMenu, new Rectangle(0, 0, 1080, 720), Color.White);
+            StateManager.Draw(); 
 
             spriteBatch.End();
         }

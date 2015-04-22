@@ -40,6 +40,13 @@ namespace Real_Time_Hobo
             return false;
         }
         /// <summary>
+        /// Initalise the stack DO BEFORE USING THIS CLASS AT ALL 
+        /// </summary>
+        public static void Initalise()
+        {
+            GameManager = new Stack<State>();
+        }
+        /// <summary>
         /// Pops the state on top of the stack off
         /// </summary>
         /// <returns>Returns true if it was sucessful and false if the stack is empty</returns>
