@@ -12,11 +12,18 @@ namespace Real_Time_Hobo
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        private Texture2D m_mockMenu;
+
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = 1080;
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.ApplyChanges();
+
         }
 
         /// <summary>
@@ -27,8 +34,6 @@ namespace Real_Time_Hobo
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -40,8 +45,8 @@ namespace Real_Time_Hobo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+       
+            m_mockMenu = Content.Load<Texture2D>("MockMenu");
         }
 
         /// <summary>
@@ -79,6 +84,12 @@ namespace Real_Time_Hobo
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(m_mockMenu, new Rectangle(0, 0, 1080, 720), Color.White);
+
+            spriteBatch.End();
         }
     }
 }
