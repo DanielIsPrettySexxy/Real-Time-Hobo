@@ -14,6 +14,8 @@ namespace Real_Time_Hobo
         public SpriteBatch spriteBatch;
         MenuState menuState;
 
+        public MouseState m_mouseState;
+
         private Texture2D m_mockMenu;
 
         
@@ -32,7 +34,7 @@ namespace Real_Time_Hobo
             StateManager.Push(menuState);
 
             IsMouseVisible = true;
-
+            m_mouseState = Mouse.GetState();
         }
 
         /// <summary>
