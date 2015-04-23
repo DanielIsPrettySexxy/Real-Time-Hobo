@@ -35,7 +35,7 @@
 /processorParam:TextureFormat=Color
 /build:Object Sprites/Hobo_Sprites.png
 
-#begin Menu Sprites/exit_button.tga
+#begin Menu Sprites/exit_button.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -44,9 +44,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Menu Sprites/exit_button.tga
+/build:Menu Sprites/exit_button.png
 
-#begin Menu Sprites/exit_clicked.tga
+#begin Menu Sprites/exit_glow.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -55,9 +55,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Menu Sprites/exit_clicked.tga
+/build:Menu Sprites/exit_glow.png
 
-#begin Menu Sprites/menu_background.tga
+#begin Menu Sprites/menu_title.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -66,9 +66,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Menu Sprites/menu_background.tga
+/build:Menu Sprites/menu_title.png
 
-#begin Menu Sprites/start_button.tga
+#begin Menu Sprites/rth_startmenu_title_glow.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -77,9 +77,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Menu Sprites/start_button.tga
+/build:Menu Sprites/rth_startmenu_title_glow.png
 
-#begin Menu Sprites/start_clicked.tga
+#begin Menu Sprites/menu_background.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -88,9 +88,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Menu Sprites/start_clicked.tga
+/build:Menu Sprites/menu_background.png
 
-#begin Menu Sprites/start_title.tga
+#begin Menu Sprites/menu_start.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -99,5 +99,5 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Menu Sprites/start_title.tga
+/build:Menu Sprites/menu_start.png
 

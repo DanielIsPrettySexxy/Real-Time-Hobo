@@ -32,7 +32,9 @@ namespace Real_Time_Hobo.State_Classes
         public void LoadContent()
         {
             m_menuBackground = game.Content.Load<Texture2D>("Menu Sprites/menu_background");
-            m_menuTitle = game.Content.Load<Texture2D>("Menu Sprites/start_title");
+            m_menuTitle = game.Content.Load<Texture2D>("Menu Sprites/menu_title");
+            m_startButton = game.Content.Load<Texture2D>("Menu Sprites/menu_start");
+            m_exitButton = game.Content.Load<Texture2D>("Menu Sprites/exit_button");
 
             spriteBatch  = game.spriteBatch;
         }
@@ -51,7 +53,9 @@ namespace Real_Time_Hobo.State_Classes
         public void Draw()
         {
             spriteBatch.Draw(m_menuBackground, new Rectangle(0, 0, 1080, 720), Color.White);
-            spriteBatch.Draw(m_menuTitle, new Rectangle(0, 0, 1080, 100), Color.White);
+            spriteBatch.Draw(m_menuTitle, new Rectangle(-120, 0, 1260, 250), Color.White);
+            spriteBatch.Draw(m_startButton, new Rectangle(0, 250, 1080, 100), Color.White);
+            spriteBatch.Draw(m_exitButton, new Rectangle(10, 350, 1080, 100), Color.White);
         }
     }
 

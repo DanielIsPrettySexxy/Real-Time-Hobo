@@ -31,6 +31,8 @@ namespace Real_Time_Hobo
             menuState = new MenuState(this);
             StateManager.Push(menuState);
 
+            IsMouseVisible = true;
+
         }
 
         /// <summary>
