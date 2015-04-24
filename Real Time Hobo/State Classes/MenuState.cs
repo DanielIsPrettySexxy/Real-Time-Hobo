@@ -20,6 +20,7 @@ namespace Real_Time_Hobo.State_Classes
 
         private Rectangle m_startButtonRectangle;
         private Rectangle m_backgroundRectangle;
+        private Rectangle m_exitButtonRectangle;
 
         private int frames = 0;
         private int m_destination = -80;
@@ -43,8 +44,9 @@ namespace Real_Time_Hobo.State_Classes
             m_startButton = game.Content.Load<Texture2D>("Menu Sprites/menu_start");
             m_exitButton = game.Content.Load<Texture2D>("Menu Sprites/exit_button");
 
-            m_startButtonRectangle = new Rectangle(0, 250, 1080, 100);
+            m_startButtonRectangle = new Rectangle(430, 280, 220, 80);
             m_backgroundRectangle = new Rectangle(m_backgroundX, 0, 1400, 720);
+            m_exitButtonRectangle = new Rectangle(435, 380, 220, 80);
 
             spriteBatch  = game.spriteBatch;
         }
@@ -86,9 +88,15 @@ namespace Real_Time_Hobo.State_Classes
             spriteBatch.Draw(m_menuBackground, m_backgroundRectangle, Color.White);
             spriteBatch.Draw(m_menuTitle, new Rectangle(-120, 0, 1260, 250), Color.White);
             spriteBatch.Draw(m_startButton, m_startButtonRectangle, Color.White);
-            spriteBatch.Draw(m_exitButton, new Rectangle(10, 350, 1080, 100), Color.White);
+            spriteBatch.Draw(m_exitButton, m_exitButtonRectangle, Color.White);
 
-                
+            if(m_startButtonRectangle.Contains(Globals.m_mousePosition))
+                spriteBatch.Draw(m_startButton, m_startButtonRectangle, Color.Red);
+            
+            if(m_exitButtonRectangle.Contains(Globals.m_mousePosition))
+                spriteBatch.Draw(m_exitButton, m_exitButtonRectangle, Color.Red);
+          
+
         }
     }
 

@@ -5,6 +5,13 @@ using Real_Time_Hobo.State_Classes;
 
 namespace Real_Time_Hobo
 {
+
+    public static class Globals
+    {
+        public static Vector2 m_mousePosition;
+        public static Rectangle m_mouseRectangle;
+    }
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -14,10 +21,7 @@ namespace Real_Time_Hobo
         public SpriteBatch spriteBatch;
         MenuState menuState;
 
-        public MouseState m_mouseState;
-
         private Texture2D m_mockMenu;
-
         
         public Game1()
             : base()
@@ -34,7 +38,9 @@ namespace Real_Time_Hobo
             StateManager.Push(menuState);
 
             IsMouseVisible = true;
-            m_mouseState = Mouse.GetState();
+
+            Globals.m_mousePosition = new Vector2(0, 0);
+            Globals.m_mouseRectangle = new Rectangle(0, 0, 0, 0);
         }
 
         /// <summary>
@@ -46,6 +52,8 @@ namespace Real_Time_Hobo
         protected override void Initialize()
         {
             base.Initialize();
+
+            InputManager.InputManager.InitaliseInputManager();
         }
 
         /// <summary>
@@ -83,6 +91,11 @@ namespace Real_Time_Hobo
             menuState.Update();
 
             base.Update(gameTime);
+
+            Globals.m_mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+           // Globals.m_mouseRectangle = new Rectangle(Globals.m_mousePosition.X, Globals.m_mousePosition.Y, 0, 0);
+
+            InputManager.InputManager.UpdateInputs();
         }
 
         /// <summary>

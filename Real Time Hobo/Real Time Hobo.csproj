@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="InputManager.cs" />
     <Compile Include="Object Classes\Hobo.cs" />
     <Compile Include="Object Classes\MapScenes.cs" />
     <Compile Include="Program.cs" />
