@@ -15,6 +15,8 @@ namespace Real_Time_Hobo
     /// </summary>
     class MapScenes
     {
+        //A reference to the game for loading in content
+        static Game1 gameRef;
         //The actual background texture for each scene
         readonly Texture2D background;
         //The cordinates of the current scene
@@ -30,6 +32,10 @@ namespace Real_Time_Hobo
         {
             cordinates[0] = a_row;
             cordinates[1] = a_col;
+        }
+        public void Initialize(Game1 a_game)
+        {
+            gameRef = a_game;
         }
         public void Update()
         {
