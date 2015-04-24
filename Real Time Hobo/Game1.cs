@@ -80,6 +80,7 @@ namespace Real_Time_Hobo
                 Exit();
 
             // TODO: Add your update logic here
+            menuState.Update();
 
             base.Update(gameTime);
         }

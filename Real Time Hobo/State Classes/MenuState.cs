@@ -19,6 +19,11 @@ namespace Real_Time_Hobo.State_Classes
         private Texture2D m_exitButton;
 
         private Rectangle m_startButtonRectangle;
+        private Rectangle m_backgroundRectangle;
+
+        private int frames = 0;
+        private int m_destination = -80;
+        private int m_backgroundX = -50;
 
         /// <summary>
         /// Constructor
@@ -39,6 +44,7 @@ namespace Real_Time_Hobo.State_Classes
             m_exitButton = game.Content.Load<Texture2D>("Menu Sprites/exit_button");
 
             m_startButtonRectangle = new Rectangle(0, 250, 1080, 100);
+            m_backgroundRectangle = new Rectangle(m_backgroundX, 0, 1400, 720);
 
             spriteBatch  = game.spriteBatch;
         }
@@ -48,7 +54,28 @@ namespace Real_Time_Hobo.State_Classes
         /// </summary>
         public void Update()
         {
+            if(frames == 3)
+            {
+                if(m_backgroundRectangle.X > m_destination)
+                {
+                    m_backgroundRectangle.X -= 1;
 
+                    if(m_backgroundRectangle.X == m_destination)
+                        m_destination = m_backgroundX + 50;
+                }
+                    
+                else if(m_backgroundRectangle.X < m_destination)
+                {
+                    m_backgroundRectangle.X += 1;
+
+                    if (m_backgroundRectangle.X == m_destination)
+                        m_destination = m_backgroundX - 80;
+                }
+              
+                frames = 0;
+            }
+
+            frames++;
         }
 
         /// <summary>
@@ -56,7 +83,7 @@ namespace Real_Time_Hobo.State_Classes
         /// </summary>
         public void Draw()
         {
-            spriteBatch.Draw(m_menuBackground, new Rectangle(0, 0, 1080, 720), Color.White);
+            spriteBatch.Draw(m_menuBackground, m_backgroundRectangle, Color.White);
             spriteBatch.Draw(m_menuTitle, new Rectangle(-120, 0, 1260, 250), Color.White);
             spriteBatch.Draw(m_startButton, m_startButtonRectangle, Color.White);
             spriteBatch.Draw(m_exitButton, new Rectangle(10, 350, 1080, 100), Color.White);
