@@ -8,15 +8,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Real_Time_Hobo.State_Classes
 {
-    class MenuState : State
+    public class MenuState : State
     {
-        Game1 game;
-        SpriteBatch spriteBatch;
+        static Game1 game;
+        static SpriteBatch spriteBatch;
 
-        private Texture2D m_menuBackground;
-        private Texture2D m_menuTitle;
-        private Texture2D m_startButton;
-        private Texture2D m_exitButton;
+        private static Texture2D m_menuBackground;
+        private static Texture2D m_menuTitle;
+        private static Texture2D m_startButton;
+        private static Texture2D m_exitButton;
 
         private Rectangle m_startButtonRectangle;
         private Rectangle m_backgroundRectangle;
@@ -29,26 +29,21 @@ namespace Real_Time_Hobo.State_Classes
         /// <summary>
         /// Constructor
         /// </summary>
-        public MenuState(Game1 a_Game1)
+        public MenuState()
+        {
+            m_startButtonRectangle = new Rectangle(430, 280, 220, 80);
+            m_backgroundRectangle = new Rectangle(m_backgroundX, 0, 1400, 720);
+            m_exitButtonRectangle = new Rectangle(435, 380, 220, 80);
+        }
+        public static void Initialize(Game1 a_Game1)
         {
             game = a_Game1;
-        }
-
-        /// <summary>
-        /// Initialize Function
-        /// </summary>
-        public void LoadContent()
-        {
             m_menuBackground = game.Content.Load<Texture2D>("Menu Sprites/menu_background");
             m_menuTitle = game.Content.Load<Texture2D>("Menu Sprites/menu_title");
             m_startButton = game.Content.Load<Texture2D>("Menu Sprites/menu_start");
             m_exitButton = game.Content.Load<Texture2D>("Menu Sprites/exit_button");
 
-            m_startButtonRectangle = new Rectangle(430, 280, 220, 80);
-            m_backgroundRectangle = new Rectangle(m_backgroundX, 0, 1400, 720);
-            m_exitButtonRectangle = new Rectangle(435, 380, 220, 80);
-
-            spriteBatch  = game.spriteBatch;
+            spriteBatch = game.BatchRef;
         }
 
         /// <summary>
@@ -61,22 +56,26 @@ namespace Real_Time_Hobo.State_Classes
                 if(m_backgroundRectangle.X > m_destination)
                 {
                     m_backgroundRectangle.X -= 1;
-
                     if(m_backgroundRectangle.X == m_destination)
                         m_destination = m_backgroundX + 50;
-                }
-                    
+                }      
                 else if(m_backgroundRectangle.X < m_destination)
                 {
                     m_backgroundRectangle.X += 1;
-
                     if (m_backgroundRectangle.X == m_destination)
                         m_destination = m_backgroundX - 80;
                 }
-              
                 frames = 0;
             }
-
+            if (m_startButtonRectangle.Contains(Globals.m_mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                StateManager.Pop();
+                StateManager.Push(game.GameRef);
+            }
+            if (m_exitButtonRectangle.Contains(Globals.m_mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                game.Exit();
+            }
             frames++;
         }
 
@@ -95,8 +94,6 @@ namespace Real_Time_Hobo.State_Classes
             
             if(m_exitButtonRectangle.Contains(Globals.m_mousePosition))
                 spriteBatch.Draw(m_exitButton, m_exitButtonRectangle, Color.Red);
-          
-
         }
     }
 

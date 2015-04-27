@@ -42,7 +42,7 @@ namespace Real_Time_Hobo
         /// <summary>
         /// Initalise the stack DO BEFORE USING THIS CLASS AT ALL 
         /// </summary>
-        public static void Initalise()
+        public static void Initialize()
         {
             GameManager = new Stack<State>();
         }

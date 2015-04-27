@@ -5,11 +5,19 @@ using Real_Time_Hobo.State_Classes;
 
 namespace Real_Time_Hobo
 {
+    public enum Direction
+    {
+        Up = (short)-3,
+        Down = (short)3,
+        Left = (short)-1,
+        Right = (short)1,
+    };
 
     public static class Globals
     {
         public static Vector2 m_mousePosition;
         public static Rectangle m_mouseRectangle;
+        public static Vector2 m_screenBoundaries;
     }
 
     /// <summary>
@@ -17,14 +25,13 @@ namespace Real_Time_Hobo
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        public SpriteBatch spriteBatch;
-        MenuState menuState;
-
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        private MenuState menuState;
+        private GameState gameState;
         private Texture2D m_mockMenu;
         
-        public Game1()
-            : base()
+        public Game1() : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -32,11 +39,9 @@ namespace Real_Time_Hobo
             graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 720;
             graphics.ApplyChanges();
-            StateManager.Initalise();
-
-            menuState = new MenuState(this);
-            StateManager.Push(menuState);
-
+            
+            menuState = new MenuState();
+            gameState = new GameState();
             IsMouseVisible = true;
 
             Globals.m_mousePosition = new Vector2(0, 0);
@@ -52,8 +57,14 @@ namespace Real_Time_Hobo
         protected override void Initialize()
         {
             base.Initialize();
-
             InputManager.InputManager.InitaliseInputManager();
+            Globals.m_screenBoundaries = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            
+            StateManager.Initialize();
+            MenuState.Initialize(this);
+            GameState.Initialize(this);
+
+            StateManager.Push(menuState);
         }
 
         /// <summary>
@@ -64,7 +75,6 @@ namespace Real_Time_Hobo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            menuState.LoadContent();
             m_mockMenu = Content.Load<Texture2D>("Menu Sprites/MockMenu");
         }
 
@@ -88,11 +98,10 @@ namespace Real_Time_Hobo
                 Exit();
 
             // TODO: Add your update logic here
-            menuState.Update();
+            Globals.m_mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            StateManager.Update();
 
             base.Update(gameTime);
-
-            Globals.m_mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
            // Globals.m_mouseRectangle = new Rectangle(Globals.m_mousePosition.X, Globals.m_mousePosition.Y, 0, 0);
 
             InputManager.InputManager.UpdateInputs();
@@ -116,5 +125,29 @@ namespace Real_Time_Hobo
 
             spriteBatch.End();
         }
+
+       #region PROPERTIES
+        /// <summary>
+        /// A property that returns a reference to the current spriteBatch
+        /// </summary>
+        public SpriteBatch BatchRef
+        {
+            get { return spriteBatch; }
+        }
+        /// <summary>
+        /// A property that gets a reference to the current Game State
+        /// </summary>
+        public GameState GameRef
+        {
+            get { return gameState; }
+        }
+        /// <summary>
+        /// A property that gets a reference to the current Menu State
+        /// </summary>
+        public MenuState MenuRef
+        {
+            get { return menuState; }
+        }
+        #endregion
     }
 }
