@@ -1,7 +1,6 @@
-﻿///
-/// AUTHOR: Daniel Waterston
-/// Last edit: 27/04/2015
-///
+﻿/// AUTHOR: Daniel Waterston
+/// Last edit: 28/04/2015
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,16 @@ using Real_Time_Hobo.State_Classes;
 
 namespace Real_Time_Hobo.State_Classes
 {
+    /// <summary>
+    /// The type of garbage cans available 
+    /// </summary>
+    private enum TrashType
+    {
+        Food = 0,
+        Materials = 1,
+        Bottles = 2,
+        Random = 3
+    }
     public class GameState : State
     {
         /// <summary>
@@ -32,10 +41,11 @@ namespace Real_Time_Hobo.State_Classes
         /// Whether the player is going up, down, left or right to the next map
         /// </summary>
         private Direction mapTransition;
+        /// <summary>The Garbage can (if there is one) on the map</summary>
         public GameState()
         {
             player = new Hobo();
-            map = new MapScene(0);
+            map = new MapScene(3);
         }
         public static void Initialize(Game1 a_mainGame)
         {

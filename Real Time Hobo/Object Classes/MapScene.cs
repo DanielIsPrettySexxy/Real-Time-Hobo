@@ -26,11 +26,9 @@ namespace Real_Time_Hobo
         ushort cordinate;
         //The directions you can go from this point in the Map
         bool MapUp = false, MapLeft = false, MapDown = false, MapRight = false;
-        /// <summary>
-        /// Deafult constructor for the Map Scene
-        /// </summary>
-        /// <param name="a_row"> What row the current area of the map is on (The X location)</param>
-        /// <param name="a_col"> What collum the current area of the map is on (The Y location)</param>
+        ///<summary>Deafult constructor for the Map Scene</summary>
+        ///<param name="a_row"> What row the current area of the map is on (The X location)</param>
+        ///<param name="a_col"> What collum the current area of the map is on (The Y location)</param>
         public MapScene(ushort a_cordinate)
         {
             cordinate = a_cordinate;
@@ -60,11 +58,9 @@ namespace Real_Time_Hobo
             }
 
         }
-        /// <summary>
-        /// Reutrns true and transitions if you can go in the direction of the map, otherwise returns false
-        /// </summary>
-        /// <param name="a_direction">The direction to transition to</param>
-        /// <returns></returns>
+        ///<summary>Atempts to transition to a new map</summary>
+        ///<param name="a_direction">The direction to transition to</param>
+        ///<returns>If the map sucesfully transitions it'll return true, otherwise it'll return false</returns>
         public bool Transition(Direction a_direction)
         {
             short tranVal = (short)a_direction;
@@ -86,6 +82,10 @@ namespace Real_Time_Hobo
         public void Draw()
         {
             gameRef.BatchRef.Draw(spriteSets[cordinate],new Vector2(0,0),Color.White);
+        }
+        public ushort MapLoc
+        {
+            get { return cordinate; }
         }
     }
 }

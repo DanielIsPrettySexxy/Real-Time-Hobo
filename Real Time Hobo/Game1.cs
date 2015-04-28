@@ -5,6 +5,9 @@ using Real_Time_Hobo.State_Classes;
 
 namespace Real_Time_Hobo
 {
+    /// <summary>
+    /// An Enum that controls the direction of Transitions
+    /// </summary>
     public enum Direction
     {
         Up = (short)-3,
@@ -66,7 +69,6 @@ namespace Real_Time_Hobo
 
             StateManager.Push(menuState);
         }
-
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -77,7 +79,6 @@ namespace Real_Time_Hobo
             spriteBatch = new SpriteBatch(GraphicsDevice);
             m_mockMenu = Content.Load<Texture2D>("Menu Sprites/MockMenu");
         }
-
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -86,7 +87,6 @@ namespace Real_Time_Hobo
         {
             // TODO: Unload any non ContentManager content here
         }
-
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -106,7 +106,6 @@ namespace Real_Time_Hobo
 
             InputManager.InputManager.UpdateInputs();
         }
-
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
