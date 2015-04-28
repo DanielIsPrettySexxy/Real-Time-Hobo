@@ -8,7 +8,7 @@ namespace Real_Time_Hobo
     /// <summary>
     /// A game state interface class to and polymorphisim for the game manager to handle
     /// </summary>
-    interface State
+    public interface IState
     {
         /// <summary>
         /// Updates the current state
@@ -24,13 +24,13 @@ namespace Real_Time_Hobo
         /// <summary>
         /// The GameManager instance is the actual stack that the gamestates run on 
         /// </summary>
-        private static Stack<State> GameManager;
+        private static Stack<IState> GameManager;
         /// <summary>
         /// Pushes the argument state on to the top of the stack
         /// </summary>
         /// <param name="a_State"> The current state to push onto the stack</param>
         /// <returns>Returns true if it was sucessfully pushed and false if the state is null</returns>
-        public static bool Push(State a_State)
+        public static bool Push(IState a_State)
         {
             if(a_State != null)
             {
@@ -44,7 +44,7 @@ namespace Real_Time_Hobo
         /// </summary>
         public static void Initialize()
         {
-            GameManager = new Stack<State>();
+            GameManager = new Stack<IState>();
         }
         /// <summary>
         /// Pops the state on top of the stack off

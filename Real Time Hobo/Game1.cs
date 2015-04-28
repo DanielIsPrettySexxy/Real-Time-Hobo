@@ -21,11 +21,12 @@ namespace Real_Time_Hobo
         public static Vector2 m_mousePosition;
         public static Rectangle m_mouseRectangle;
         public static Vector2 m_screenBoundaries;
+        public static uint Seconds;
+        public static uint Minutes;
+        public static uint Hours;
+        public static ushort Days;
     }
-
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
+    ///<summary> This is the main type for your game</summary>
     public class Game1 : Game
     {
         private GraphicsDeviceManager graphics;
@@ -99,6 +100,24 @@ namespace Real_Time_Hobo
 
             // TODO: Add your update logic here
             Globals.m_mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            Globals.Seconds++;
+            if(Globals.Seconds > 60)
+            {
+                Globals.Seconds = 0;
+                Globals.Minutes++;
+            }
+            if(Globals.Minutes > 60)
+            {
+                Globals.Minutes = 0;
+                Globals.Hours++;
+            }
+            if(Globals.Hours > 12)
+            {
+                Globals.Days++;
+                Globals.Hours = 0;
+            }
+            if (Globals.Days > 7) ;
+
             StateManager.Update();
 
             base.Update(gameTime);
@@ -106,9 +125,7 @@ namespace Real_Time_Hobo
 
             InputManager.InputManager.UpdateInputs();
         }
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
+        ///<summary>This is called when the game should draw itself.</summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {

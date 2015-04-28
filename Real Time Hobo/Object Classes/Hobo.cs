@@ -5,54 +5,33 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Real_Time_Hobo.State_Classes;
 
 namespace Real_Time_Hobo
 {
-    /// <summary>
-    /// The hobo and main player class used to interact with the world
-    /// </summary>
+    ///<summary> The hobo and main player class used to interact with the world</summary>
     class Hobo
     {
         #region VARIABLES
-            /// <summary>
-            /// A static reference to Game1
-            /// </summary>
+            ///<summary> A static reference to Game1</summary>
             static Game1 game;
-            /// <summary>
-            /// A static sprite for hobo to draw with
-            /// </summary>
+            ///<summary>A static sprite for hobo to draw with</summary>
             static Texture2D hoboSprite;
-            /// <summary>
-            /// The current frame of the sprite thats drawing
-            /// </summary>
+            ///<summary>The current frame of the sprite thats drawing</summary>
             Rectangle m_frameBounds;
-            /// <summary>
-            /// The hobos position
-            /// </summary>
+            ///<summary>The hobos position</summary>
             Vector2 m_position;
-            /// <summary>
-            /// The speed and direction of the hobo
-            /// </summary>
+            ///<summary>The speed and direction of the hobo</summary>
             Vector2 m_velocity;
-            /// <summary>
-            /// The number of pixels by which too offset the UVs each frame
-            /// </summary>
+            ///<summary>The number of pixels by which too offset the UVs each frame</summary>
             Vector2 m_frameOffset;
-            /// <summary>
-            /// A ticker that controls the animation time
-            /// </summary>
+            ///<summary>A ticker that controls the animation time</summary>
             ushort m_frameTick = 0;
-            /// <summary>
-            /// The number of bottles the hobo currently has 
-            /// </summary>
+            ///<summary>The number of bottles the hobo currently has</summary>
             ushort m_bottleCount = 1;
-            /// <summary>
-            /// The number of matirials for bas upgrades the hobo currently has 
-            /// </summary>
+            ///<summary>The number of matirials for bas upgrades the hobo currently has</summary>
             ushort m_matCount = 1;
-            /// <summary>
-            /// The current health of the hobo 
-            /// </summary>
+            ///<summary>The current health of the hobo</summary>
             ushort m_Health = 1;
         #endregion
         #region FUNCTIONS
@@ -72,9 +51,32 @@ namespace Real_Time_Hobo
                 game = a_gameRef;
                 hoboSprite = a_gameRef.Content.Load<Texture2D>("Object Sprites/Hobo_Sprites");
             }
-            /// <summary>
-            /// Moves the UVs and moves the hobo towards the mouse
-            /// </summary>
+            ///<summary>Adds a resource to the hobo based on the type given</summary>
+            /// <param name="a_resType">The type of resource to add</param>
+            /// <param name="a_num">The number of resources to add</param>
+            public void AddResource(TrashType a_resType, ushort a_num)
+            {
+                switch(a_resType)
+                {
+                    case TrashType.Bottles : m_bottleCount += a_num; break;
+                    case TrashType.Food    : m_Health += a_num; break;
+                    case TrashType.Materials : m_matCount += a_num; break;
+                    case TrashType.Random : 
+                    {
+                        Random rand = new Random();
+                        switch (rand.Next(1,3))
+                        {
+                            case 1 :m_bottleCount += a_num; break;
+                            case 2 :m_Health += a_num; break;
+                            case 3: m_matCount += a_num; break;
+                            default: break;
+                        }
+                        break;
+                    }
+                    default: break;
+                }
+            }
+            ///<summary>Moves the UVs and moves the hobo towards the mouse</summary>
             public void Update()
             {
                 m_frameTick++;
@@ -91,18 +93,16 @@ namespace Real_Time_Hobo
                 m_velocity.Normalize();
                 m_velocity *= 3;
             }
-            /// <summary>
-            /// Draws the hobo
-            /// </summary>
+            ///<summary>Draws the hobo</summary>
             public void Draw()
             {
                 game.BatchRef.Draw(hoboSprite, m_position,m_frameBounds,Color.White);
             }
         #endregion
         #region PROPERIES
-            public ushort Bottles
+            public Vector2 Position
             {
-                set { m_bottleCount = value;}
+                get { return m_position; }
             }
         #endregion
     }

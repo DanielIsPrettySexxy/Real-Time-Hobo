@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Real_Time_Hobo.State_Classes
 {
-    public class MenuState : State
+    public class MenuState : IState
     {
         static Game1 game;
         static SpriteBatch spriteBatch;

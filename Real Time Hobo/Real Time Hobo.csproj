@@ -62,6 +62,7 @@
     <Content Include="Content\Map Sprites\Map02.jpg" />
     <Content Include="Content\Map Sprites\Map03.jpg" />
     <Content Include="Content\Menu Sprites\MockMenu.png" />
+    <Content Include="Content\Object Sprites\Garbage Can.png" />
     <Content Include="Content\Object Sprites\Hobo_Sprites.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
