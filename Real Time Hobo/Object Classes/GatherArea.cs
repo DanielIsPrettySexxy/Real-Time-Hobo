@@ -44,7 +44,7 @@ namespace Real_Time_Hobo.Object_Classes
         }
         public void Draw()
         {
-            gameRef.BatchRef.Draw(sprite,m_hitBox,Color.White);
+          //  gameRef.BatchRef.Draw(sprite,m_hitBox,Color.White);
         }
         public TrashType Trash
         {

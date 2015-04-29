@@ -43,13 +43,15 @@ namespace Real_Time_Hobo.State_Classes
         ///<summary>Controls random values for resources</summary>
         Random m_resRand;
         private bool m_isItTwo;
+        HomeBase m_base;
         public GameState()
         {
             m_player = new Hobo();
             m_map = new MapScene(0);
-            m_garbagePlace = new GatherArea(TrashType.Bottles,new Rectangle(75,95,650,700));
+            m_garbagePlace = new GatherArea(TrashType.Materials, new Rectangle(75, 95, 650, 700));
             m_resRand = new Random();
             m_mugger = new Mugger(new Vector2(20,20));
+            m_base = new HomeBase();
         }
         public static void Initialize(Game1 a_mainGame)
         {
@@ -58,6 +60,7 @@ namespace Real_Time_Hobo.State_Classes
             GatherArea.Initialize(a_mainGame);
             Hobo.Initialize(a_mainGame);
             MapScene.Initialize(m_game, m_mapCount);
+            HomeBase.Initialize(a_mainGame);
         }
         public void Update()
         {
@@ -66,6 +69,7 @@ namespace Real_Time_Hobo.State_Classes
             else
                 m_isItTwo = false;
 
+            m_base.ResourceNumber = m_player.m_matCount;
             if (m_garbagePlace.CheckCollision(m_player.m_position))
             {
                 ushort randValue = (ushort)m_resRand.Next(m_minRes, m_maxRes);
@@ -116,6 +120,7 @@ namespace Real_Time_Hobo.State_Classes
             m_map.Draw();
             if(!m_mugger.Dead && m_isItTwo)
                 m_mugger.Draw();
+            m_base.Draw();
             m_garbagePlace.Draw();
             m_player.Draw();
         }

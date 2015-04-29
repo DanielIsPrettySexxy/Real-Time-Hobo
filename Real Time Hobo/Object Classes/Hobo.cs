@@ -40,7 +40,7 @@ namespace Real_Time_Hobo
             ///<summary>The number of bottles the hobo currently has</summary>
             ushort m_bottleCount = 15;
             ///<summary>The number of matirials for bas upgrades the hobo currently has</summary>
-            ushort m_matCount = 1;
+            public ushort m_matCount = 1;
             ///<summary>The current health of the hobo</summary>
             ushort m_Health = 300;
             public bool Fighting = false;
