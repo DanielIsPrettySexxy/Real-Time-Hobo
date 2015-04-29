@@ -19,7 +19,7 @@ namespace Real_Time_Hobo
         //A array of all the sprites for the backrounds, loaded in at the start for efficacy
         private static Texture2D[] spriteSets;
         //The maximum number of maps in the game
-        private static ushort mapCount;
+        private static ushort mapCount = 5;
         //The cordinates of the current scene
         private ushort m_cordinate;
         //The directions you can go from this point in the Map
@@ -34,14 +34,23 @@ namespace Real_Time_Hobo
         }
         private void CalculateTransitions()
         {
-            if ((m_cordinate + Direction.Up) >= 0)
+            short upNum = (short)(Direction.Up), downNum = (short)(Direction.Down), leftNum = (short)(Direction.Left), rightNum = (short)(Direction.Right);
+            if ((m_cordinate + upNum) >= 0)
                 MapUp = true;
-            if ((m_cordinate + (ushort)Direction.Down) >= mapCount)
+            else
+                MapUp = false;
+            if ((m_cordinate + downNum) <= mapCount)
                 MapDown = true;
-            if ((m_cordinate + Direction.Left) >= 0)
+            else
+                MapDown = false;
+            if ((m_cordinate + leftNum) >= 0)
                 MapLeft = true;
-            if ((m_cordinate + (ushort)Direction.Right) >= mapCount)
+            else
+                MapLeft = false;
+            if ((m_cordinate + rightNum) <= mapCount)
                 MapRight = true;
+            else
+                MapRight = false;
         }
         public static void Initialize(Game1 a_game, ushort a_mapCount)
         {
@@ -79,7 +88,7 @@ namespace Real_Time_Hobo
         }
         public void Draw()
         {
-            m_gameRef.BatchRef.Draw(spriteSets[m_cordinate],new Vector2(0,0),Color.White);
+            m_gameRef.BatchRef.Draw(spriteSets[m_cordinate], new Vector2(0, 0), Globals.DayNightCycle);
         }
         public ushort MapLoc
         {

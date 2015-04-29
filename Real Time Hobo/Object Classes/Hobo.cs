@@ -28,7 +28,7 @@ namespace Real_Time_Hobo
             ///<summary>Where the hobo should end up</summary>
             Vector2 m_destination;
             ///<summary>The hobos position</summary>
-            Vector2 m_position;
+            public Vector2 m_position;
             ///<summary>The speed and direction of the hobo</summary>
             Vector2 m_velocity;
             ///<summary>The number of pixels by which too offset the UVs each frame</summary>
@@ -38,11 +38,12 @@ namespace Real_Time_Hobo
             ///<summary>A ticker that controls how qucikly the animation is played</summary>
             ushort m_regulatorTick = 0;
             ///<summary>The number of bottles the hobo currently has</summary>
-            ushort m_bottleCount = 1;
+            ushort m_bottleCount = 15;
             ///<summary>The number of matirials for bas upgrades the hobo currently has</summary>
             ushort m_matCount = 1;
             ///<summary>The current health of the hobo</summary>
-            ushort m_Health = 1;
+            ushort m_Health = 300;
+            public bool Fighting = false;
         #endregion
         #region FUNCTIONS
             public Hobo()
@@ -113,7 +114,7 @@ namespace Real_Time_Hobo
                     }
                     m_velocity = m_destination - m_position;
                     m_velocity.Normalize();
-                    m_velocity *= 3;
+                    m_velocity *= 4;
                 }
                 else
                 {
@@ -121,6 +122,10 @@ namespace Real_Time_Hobo
                     m_destination = m_position;
                     m_frameBounds.X = 0;
                 }
+                if (Fighting)
+                    m_frameBounds.Y = (int)m_frameOffset.Y;
+                else
+                    m_frameBounds.Y = 0;
 
                 if(m_velocity.X < 0)
                     m_turned = SpriteEffects.None;
@@ -133,13 +138,14 @@ namespace Real_Time_Hobo
             ///<summary>Draws the hobo</summary>
             public void Draw()
             {
-                game.BatchRef.Draw(hoboSprite, m_spriteBounds, m_frameBounds, Color.White,0,m_orgin,m_turned,0);
+                game.BatchRef.Draw(hoboSprite, m_spriteBounds, m_frameBounds, Globals.DayNightCycle, 0, m_orgin, m_turned, 0);
             }
         #endregion
         #region PROPERIES
-            public Vector2 Position
+            public ushort Bottles
             {
-                get { return m_position; }
+                get { return m_bottleCount; }
+                set { m_bottleCount = value; }
             }
         #endregion
     }

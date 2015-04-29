@@ -8,7 +8,7 @@ namespace Real_Time_Hobo
     /// <summary>
     /// An Enum that controls the direction of Transitions
     /// </summary>
-    public enum Direction
+    public enum Direction : short
     {
         Up = (short)-3,
         Down = (short)3,
