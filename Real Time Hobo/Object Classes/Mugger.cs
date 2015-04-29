@@ -7,16 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Real_Time_Hobo.State_Classes;
 
-namespace Real_Time_Hobo
+namespace Real_Time_Hobo.Object_Classes
 {
-    ///<summary> The hobo and main player class used to interact with the world</summary>
-    class Hobo
+    class Mugger
     {
-        #region VARIABLES
+          #region VARIABLES
+
             ///<summary> A static reference to Game1</summary>
             static Game1 game;
             ///<summary>A static sprite for hobo to draw with</summary>
-            static Texture2D hoboSprite;
+            static Texture2D muggerSprite;
             ///<summary>The current frame of the sprite thats drawing</summary>
             Rectangle m_frameBounds;
             ///<summary>The hobos position</summary>
@@ -29,13 +29,10 @@ namespace Real_Time_Hobo
             ushort m_frameTick = 0;
             ///<summary>The number of bottles the hobo currently has</summary>
             ushort m_bottleCount = 1;
-            ///<summary>The number of matirials for bas upgrades the hobo currently has</summary>
-            ushort m_matCount = 1;
-            ///<summary>The current health of the hobo</summary>
-            ushort m_Health = 1;
+
         #endregion
         #region FUNCTIONS
-            public Hobo()
+            public Mugger()
             {
                 m_frameOffset = new Vector2(367,474);
                 m_frameBounds = new Rectangle(0, 0, (int)m_frameOffset.X, (int)m_frameOffset.Y);
@@ -49,7 +46,7 @@ namespace Real_Time_Hobo
             public static void Initialize(Game1 a_gameRef)
             {
                 game = a_gameRef;
-                hoboSprite = a_gameRef.Content.Load<Texture2D>("Object Sprites/Hobo_Sprites");
+                muggerSprite = a_gameRef.Content.Load<Texture2D>("Object Sprites/Hobo_Sprites");
             }
             ///<summary>Adds a resource to the hobo based on the type given</summary>
             /// <param name="a_resType">The type of resource to add</param>
@@ -59,16 +56,12 @@ namespace Real_Time_Hobo
                 switch(a_resType)
                 {
                     case TrashType.Bottles : m_bottleCount += a_num; break;
-                    case TrashType.Food    : m_Health += a_num; break;
-                    case TrashType.Materials : m_matCount += a_num; break;
                     case TrashType.Random : 
                     {
                         Random rand = new Random();
                         switch (rand.Next(1,3))
                         {
                             case 1 :m_bottleCount += a_num; break;
-                            case 2 :m_Health += a_num; break;
-                            case 3: m_matCount += a_num; break;
                             default: break;
                         }
                         break;
@@ -96,7 +89,7 @@ namespace Real_Time_Hobo
             ///<summary>Draws the hobo</summary>
             public void Draw()
             {
-                game.BatchRef.Draw(hoboSprite, m_position, m_frameBounds,Color.White);
+                game.BatchRef.Draw(muggerSprite, m_position, m_frameBounds, Color.White);
             }
         #endregion
         #region PROPERIES

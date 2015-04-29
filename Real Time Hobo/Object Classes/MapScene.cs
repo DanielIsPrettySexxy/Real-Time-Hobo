@@ -68,7 +68,7 @@ namespace Real_Time_Hobo
                 case -1: if (MapLeft){m_cordinate -= 1; }  else { return false;} break;
                 case 1:  if (MapRight){ m_cordinate += 1;} else { return false;} break;
                 case 3:  if (MapDown){m_cordinate +=3;}    else { return false;} break;
-                case -3: if (MapUp) { m_cordinate -= 3;}  else  { return false;} break;
+                case -3: if (MapUp) { m_cordinate -= 3;}   else  { return false;} break;
                 default: return false;
             }
             CalculateTransitions();

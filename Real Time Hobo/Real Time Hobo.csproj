@@ -42,7 +42,9 @@
     <Compile Include="InputManager.cs" />
     <Compile Include="Object Classes\GatherArea.cs" />
     <Compile Include="Object Classes\Hobo.cs" />
+    <Compile Include="Object Classes\HomeBase.cs" />
     <Compile Include="Object Classes\MapScene.cs" />
+    <Compile Include="Object Classes\Mugger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="State Classes\GameState.cs" />

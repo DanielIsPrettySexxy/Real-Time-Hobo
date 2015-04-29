@@ -84,7 +84,7 @@ namespace Real_Time_Hobo.State_Classes
         /// </summary>
         public void Draw()
         {
-            spriteBatch.Draw(m_menuBackground, m_backgroundRectangle, Color.White);
+            spriteBatch.Draw(m_menuBackground, m_backgroundRectangle, Globals.DayNightCycle);
             spriteBatch.Draw(m_menuTitle, new Rectangle(-120, 0, 1260, 250), Color.White);
             spriteBatch.Draw(m_startButton, m_startButtonRectangle, Color.White);
             spriteBatch.Draw(m_exitButton, m_exitButtonRectangle, Color.White);

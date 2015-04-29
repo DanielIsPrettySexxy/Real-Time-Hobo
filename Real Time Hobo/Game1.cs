@@ -25,6 +25,11 @@ namespace Real_Time_Hobo
         public static uint Minutes;
         public static uint Hours;
         public static ushort Days;
+        public static Color Day;
+        public static Color Night;
+        public static Color DayNightCycle;
+        public static bool isDayTime;
+        public static bool transition;
     }
     ///<summary> This is the main type for your game</summary>
     public class Game1 : Game
@@ -33,7 +38,7 @@ namespace Real_Time_Hobo
         private SpriteBatch spriteBatch;
         private MenuState menuState;
         private GameState gameState;
-        private Texture2D m_mockMenu;
+        private float m_lerpValue;
         
         public Game1() : base()
         {
@@ -50,6 +55,14 @@ namespace Real_Time_Hobo
 
             Globals.m_mousePosition = new Vector2(0, 0);
             Globals.m_mouseRectangle = new Rectangle(0, 0, 0, 0);
+
+            Globals.Day = new Color(255, 255, 255, 255);
+            Globals.Night = new Color(55, 55, 55, 255);
+            Globals.DayNightCycle = new Color(Globals.Night, 1);
+            Globals.isDayTime = false;
+            Globals.transition = false;
+            Globals.Hours = 6;
+            m_lerpValue = 0.08333f;
         }
 
         /// <summary>
@@ -78,7 +91,6 @@ namespace Real_Time_Hobo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            m_mockMenu = Content.Load<Texture2D>("Menu Sprites/MockMenu");
         }
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -105,13 +117,17 @@ namespace Real_Time_Hobo
             {
                 Globals.Seconds = 0;
                 Globals.Minutes++;
+
+                if (Globals.transition == true)
+                    m_lerpValue += 0.01666666f;
+                    
             }
             if(Globals.Minutes > 60)
             {
                 Globals.Minutes = 0;
                 Globals.Hours++;
             }
-            if(Globals.Hours > 12)
+            if(Globals.Hours > 24)
             {
                 Globals.Days++;
                 Globals.Hours = 0;
@@ -119,6 +135,41 @@ namespace Real_Time_Hobo
             if (Globals.Days > 7) ;
 
             StateManager.Update();
+
+            if (Globals.Hours >= 7)
+                Globals.isDayTime = true;
+            else if (Globals.Hours >= 17)
+                Globals.isDayTime = false;
+
+
+            if(Globals.Hours >= 0 && Globals.Hours <=6)
+            {
+                Globals.transition = false;
+                m_lerpValue = 0.08333f;
+                Globals.DayNightCycle = Globals.Night;
+            }
+            else if(Globals.Hours >= 6 && Globals.Hours <= 7)
+            {
+                Globals.transition = true;
+                Globals.DayNightCycle = Color.Lerp(Globals.Night, Globals.Day, m_lerpValue);
+            }
+            else if(Globals.Hours >= 7 && Globals.Hours <= 17)
+            {
+                Globals.transition = false;
+                m_lerpValue = 0.08333f;
+                Globals.DayNightCycle = Globals.Day;
+            }
+            else if (Globals.Hours >= 17 && Globals.Hours <= 18)
+            {
+                Globals.transition = true;
+                Globals.DayNightCycle = Color.Lerp(Globals.Day, Globals.Night, m_lerpValue);
+            }
+            else if (Globals.Hours >= 18 && Globals.Hours <= 24)
+            {
+                Globals.transition = false;
+                m_lerpValue = 0.08333f;
+                Globals.DayNightCycle = Globals.Night;
+            }
 
             base.Update(gameTime);
            // Globals.m_mouseRectangle = new Rectangle(Globals.m_mousePosition.X, Globals.m_mousePosition.Y, 0, 0);

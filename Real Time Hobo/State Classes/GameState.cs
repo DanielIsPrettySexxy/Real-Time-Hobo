@@ -51,7 +51,7 @@ namespace Real_Time_Hobo.State_Classes
         public GameState()
         {
             m_player = new Hobo();
-            m_map = new MapScene(3);
+            m_map = new MapScene(0);
             m_garbagePlace = new GatherArea(TrashType.Bottles,new Rectangle(20,20,100,100));
             m_resRand = new Random();
         }
