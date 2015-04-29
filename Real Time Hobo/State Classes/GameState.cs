@@ -44,6 +44,8 @@ namespace Real_Time_Hobo.State_Classes
         Random m_resRand;
         private bool m_isItTwo;
         HomeBase m_base;
+        GUI m_gui;
+
         public GameState()
         {
             m_player = new Hobo();
@@ -52,6 +54,7 @@ namespace Real_Time_Hobo.State_Classes
             m_resRand = new Random();
             m_mugger = new Mugger(new Vector2(20,20));
             m_base = new HomeBase();
+            m_gui = new GUI();
         }
         public static void Initialize(Game1 a_mainGame)
         {
@@ -61,6 +64,7 @@ namespace Real_Time_Hobo.State_Classes
             Hobo.Initialize(a_mainGame);
             MapScene.Initialize(m_game, m_mapCount);
             HomeBase.Initialize(a_mainGame);
+            GUI.Initialize(a_mainGame);
         }
         public void Update()
         {
@@ -123,6 +127,8 @@ namespace Real_Time_Hobo.State_Classes
             m_base.Draw();
             m_garbagePlace.Draw();
             m_player.Draw();
+            m_gui.Draw();
+            
         }
     }
 }

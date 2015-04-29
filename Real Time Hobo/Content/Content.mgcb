@@ -222,3 +222,14 @@
 /processorParam:TextureFormat=Color
 /build:Object Sprites/Mugger_Sprites.png
 
+#begin GUI/GUI.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:GUI/GUI.png
+

@@ -31,27 +31,26 @@ namespace Real_Time_Hobo.Object_Classes
         public static void Initialize(Game1 a_gameRef)
         {
             game = a_gameRef;
-            m_baseTexture = a_gameRef.Content.Load<Texture2D>("Map Sprites/RTH Alleyway");
-            m_stage1Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/RTH homebase 1");
-            m_stage2Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/RTH homebase 2");
-            m_stage3Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/RTH homebase 3");
-            m_stage4Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/RTH homebase 4");
+            m_baseTexture = a_gameRef.Content.Load<Texture2D>("Map Sprites/Map00");
+            m_stage1Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/Bases/Base1");
+            m_stage2Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/Bases/Base2");
+            m_stage3Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/Bases/Base3");
+            m_stage4Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/Bases/Base4");
         }
 
         public void Draw()
         {
-            game.BatchRef.Draw(m_baseTexture, new Rectangle(0, 0, 1080, 720), Color.White);
+            game.BatchRef.Draw(m_baseTexture, new Rectangle(0, 0, 1080, 720), Globals.DayNightCycle);
 
 
             if(m_resourceNumber < 5)
             {
-                game.BatchRef.Draw(m_stage1Base, new Rectangle(0, 0, 1080, 720), Color.White);
+                game.BatchRef.Draw(m_stage1Base, new Rectangle(0, 0, 1080, 720), Globals.DayNightCycle);
             }
-
+            
             else if(m_resourceNumber >= 5 && m_resourceNumber <= 15)
             {
-                game.BatchRef.Draw(m_stage1Base, new Rectangle(0, 0, 1080, 720), Color.White);
-                game.BatchRef.Draw(m_stage2Base, new Rectangle(0, 0, 1080, 720), Color.White);
+                game.BatchRef.Draw(m_stage2Base, new Rectangle(0, 0, 1080, 720), Globals.DayNightCycle);
             }
         }
         public float ResourceNumber
