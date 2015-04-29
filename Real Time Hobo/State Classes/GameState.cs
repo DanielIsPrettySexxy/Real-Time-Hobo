@@ -122,9 +122,11 @@ namespace Real_Time_Hobo.State_Classes
         public void Draw()
         {
             m_map.Draw();
-            if(!m_mugger.Dead && m_isItTwo)
+            if (!m_mugger.Dead && m_isItTwo)
+            {
                 m_mugger.Draw();
-            m_base.Draw();
+                m_base.Draw();
+            }
             m_garbagePlace.Draw();
             m_player.Draw();
             m_gui.Draw();
