@@ -31,6 +31,7 @@ namespace Real_Time_Hobo
         public static bool isDayTime;
         public static bool transition;
     }
+    /// </summary>
     ///<summary> This is the main type for your game</summary>
     public class Game1 : Game
     {

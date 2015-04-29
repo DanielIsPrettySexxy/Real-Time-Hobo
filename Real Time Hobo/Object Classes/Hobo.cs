@@ -96,6 +96,7 @@ namespace Real_Time_Hobo
             ///<summary>Draws the hobo</summary>
             public void Draw()
             {
+                game.BatchRef.Draw(hoboSprite, m_position,m_frameBounds,Color.White);
                 game.BatchRef.Draw(hoboSprite, m_position, m_frameBounds,Color.White);
             }
         #endregion
