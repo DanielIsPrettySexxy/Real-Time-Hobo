@@ -18,9 +18,9 @@ namespace Real_Time_Hobo
 
     public static class Globals
     {
-        public static Vector2 m_mousePosition;
-        public static Rectangle m_mouseRectangle;
-        public static Vector2 m_screenBoundaries;
+        public static Vector2 MousePosition;
+        public static Rectangle MouseRectangle;
+        public static Vector2 ScreenBoundaries;
         public static uint Seconds;
         public static uint Minutes;
         public static uint Hours;
@@ -46,16 +46,16 @@ namespace Real_Time_Hobo
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1080;
-            graphics.PreferredBackBufferHeight = 720;
+            Globals.ScreenBoundaries.X = graphics.PreferredBackBufferWidth = 1080;
+            Globals.ScreenBoundaries.Y = graphics.PreferredBackBufferHeight = 720;
             graphics.ApplyChanges();
             
             menuState = new MenuState();
             gameState = new GameState();
             IsMouseVisible = true;
 
-            Globals.m_mousePosition = new Vector2(0, 0);
-            Globals.m_mouseRectangle = new Rectangle(0, 0, 0, 0);
+            Globals.MousePosition = new Vector2(0, 0);
+            Globals.MouseRectangle = new Rectangle(0, 0, 0, 0);
 
             Globals.Day = new Color(255, 255, 255, 255);
             Globals.Night = new Color(55, 55, 55, 255);
@@ -76,7 +76,7 @@ namespace Real_Time_Hobo
         {
             base.Initialize();
             InputManager.InputManager.InitaliseInputManager();
-            Globals.m_screenBoundaries = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            Globals.ScreenBoundaries = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             
             StateManager.Initialize();
             MenuState.Initialize(this);
@@ -112,7 +112,7 @@ namespace Real_Time_Hobo
                 Exit();
 
             // TODO: Add your update logic here
-            Globals.m_mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            Globals.MousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             Globals.Seconds++;
             if(Globals.Seconds > 60)
             {

@@ -19,6 +19,14 @@ namespace Real_Time_Hobo
             static Texture2D hoboSprite;
             ///<summary>The current frame of the sprite thats drawing</summary>
             Rectangle m_frameBounds;
+            ///<summary>The current bounding box of the sprite</summary>
+            Rectangle m_spriteBounds;
+            ///<summary>The orgin of the sprite</summary>
+            Vector2 m_orgin;
+            ///<summary>whether or not the sprite is fliped</summary>
+            SpriteEffects m_turned;
+            ///<summary>Where the hobo should end up</summary>
+            Vector2 m_destination;
             ///<summary>The hobos position</summary>
             Vector2 m_position;
             ///<summary>The speed and direction of the hobo</summary>
@@ -27,6 +35,8 @@ namespace Real_Time_Hobo
             Vector2 m_frameOffset;
             ///<summary>A ticker that controls the animation time</summary>
             ushort m_frameTick = 0;
+            ///<summary>A ticker that controls how qucikly the animation is played</summary>
+            ushort m_regulatorTick = 0;
             ///<summary>The number of bottles the hobo currently has</summary>
             ushort m_bottleCount = 1;
             ///<summary>The number of matirials for bas upgrades the hobo currently has</summary>
@@ -37,10 +47,12 @@ namespace Real_Time_Hobo
         #region FUNCTIONS
             public Hobo()
             {
-                m_frameOffset = new Vector2(367,474);
+                m_frameOffset = new Vector2(524, 484);
                 m_frameBounds = new Rectangle(0, 0, (int)m_frameOffset.X, (int)m_frameOffset.Y);
-                m_position = new Vector2(0,0);
-                m_velocity = new Vector2(1,1);
+                m_position = new Vector2(Globals.ScreenBoundaries.X/2, Globals.ScreenBoundaries.Y/2);
+                m_destination = m_velocity = new Vector2(1,1);
+                m_spriteBounds = new Rectangle((int)m_position.X,(int)m_position.Y,250,250);
+                m_orgin = new Vector2(m_spriteBounds.Width,m_spriteBounds.Height);
             }
             /// <summary>
             /// Loads the hobos sprite and a reference to Game1
@@ -79,25 +91,49 @@ namespace Real_Time_Hobo
             ///<summary>Moves the UVs and moves the hobo towards the mouse</summary>
             public void Update()
             {
-                m_frameTick++;
+                m_regulatorTick++;
                 m_position += m_velocity;
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    m_destination = Globals.MousePosition;
 
-                if(m_frameTick < 3)
-                    m_frameBounds.X += (int)m_frameOffset.X;
+                m_velocity = m_destination - m_position;
+                if (m_velocity.Length() > 3)
+                {
+                    if (m_regulatorTick > 8)
+                    {
+                        m_frameTick++;
+                        if (m_frameTick < 3)
+                            m_frameBounds.X += (int)m_frameOffset.X;
+                        else
+                        {
+                            m_frameTick = 0;
+                            m_frameBounds.X = 0;
+                        }
+                        m_regulatorTick = 0;
+                    }
+                    m_velocity = m_destination - m_position;
+                    m_velocity.Normalize();
+                    m_velocity *= 3;
+                }
                 else
                 {
-                    m_frameTick = 0;
+                    m_velocity = new Vector2(0,0);
+                    m_destination = m_position;
                     m_frameBounds.X = 0;
                 }
-                m_velocity = Globals.m_mousePosition - m_position;
-                m_velocity.Normalize();
-                m_velocity *= 3;
+
+                if(m_velocity.X < 0)
+                    m_turned = SpriteEffects.None;
+                else
+                    m_turned = SpriteEffects.FlipHorizontally;
+
+                m_spriteBounds.X = (int)m_position.X;
+                m_spriteBounds.Y = (int)m_position.Y;
             }
             ///<summary>Draws the hobo</summary>
             public void Draw()
             {
-                game.BatchRef.Draw(hoboSprite, m_position,m_frameBounds,Color.White);
-                game.BatchRef.Draw(hoboSprite, m_position, m_frameBounds,Color.White);
+                game.BatchRef.Draw(hoboSprite, m_spriteBounds, m_frameBounds, Color.White,0,m_orgin,m_turned,0);
             }
         #endregion
         #region PROPERIES

@@ -67,12 +67,12 @@ namespace Real_Time_Hobo.State_Classes
                 }
                 frames = 0;
             }
-            if (m_startButtonRectangle.Contains(Globals.m_mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (m_startButtonRectangle.Contains(Globals.MousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 StateManager.Pop();
                 StateManager.Push(game.GameRef);
             }
-            if (m_exitButtonRectangle.Contains(Globals.m_mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (m_exitButtonRectangle.Contains(Globals.MousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 game.Exit();
             }
@@ -89,10 +89,10 @@ namespace Real_Time_Hobo.State_Classes
             spriteBatch.Draw(m_startButton, m_startButtonRectangle, Color.White);
             spriteBatch.Draw(m_exitButton, m_exitButtonRectangle, Color.White);
 
-            if(m_startButtonRectangle.Contains(Globals.m_mousePosition))
+            if(m_startButtonRectangle.Contains(Globals.MousePosition))
                 spriteBatch.Draw(m_startButton, m_startButtonRectangle, Color.Red);
             
-            if(m_exitButtonRectangle.Contains(Globals.m_mousePosition))
+            if(m_exitButtonRectangle.Contains(Globals.MousePosition))
                 spriteBatch.Draw(m_exitButton, m_exitButtonRectangle, Color.Red);
         }
     }

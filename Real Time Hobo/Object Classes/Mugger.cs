@@ -82,7 +82,7 @@ namespace Real_Time_Hobo.Object_Classes
                     m_frameTick = 0;
                     m_frameBounds.X = 0;
                 }
-                m_velocity = Globals.m_mousePosition - m_position;
+                m_velocity = Globals.MousePosition - m_position;
                 m_velocity.Normalize();
                 m_velocity *= 3;
             }
