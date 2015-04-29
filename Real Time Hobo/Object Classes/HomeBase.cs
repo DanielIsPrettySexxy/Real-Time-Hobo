@@ -22,7 +22,7 @@ namespace Real_Time_Hobo.Object_Classes
         static Texture2D m_stage2Base;
         static Texture2D m_stage3Base;
         static Texture2D m_stage4Base;
-
+        uint Tick = 0;
         public HomeBase()
         {
             m_resourceNumber = 0;
@@ -37,7 +37,16 @@ namespace Real_Time_Hobo.Object_Classes
             m_stage3Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/Bases/Base3");
             m_stage4Base = a_gameRef.Content.Load<Texture2D>("Map Sprites/Bases/Base4");
         }
-
+        public void Update()
+        {
+            Tick++;
+            if(Tick > 50)
+            { 
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+                m_resourceNumber += 5;
+            Tick = 0;
+            }
+        }
         public void Draw()
         {
             game.BatchRef.Draw(m_baseTexture, new Rectangle(0, 0, 1080, 720), Globals.DayNightCycle);
@@ -51,6 +60,14 @@ namespace Real_Time_Hobo.Object_Classes
             else if(m_resourceNumber >= 5 && m_resourceNumber <= 15)
             {
                 game.BatchRef.Draw(m_stage2Base, new Rectangle(0, 0, 1080, 720), Globals.DayNightCycle);
+            }
+            else if (m_resourceNumber >= 15 && m_resourceNumber <= 20)
+            {
+                game.BatchRef.Draw(m_stage3Base, new Rectangle(0, 0, 1080, 720), Globals.DayNightCycle);
+            }
+            else if (m_resourceNumber >= 20)
+            {
+                game.BatchRef.Draw(m_stage4Base, new Rectangle(0, 0, 1080, 720), Globals.DayNightCycle);
             }
         }
         public float ResourceNumber

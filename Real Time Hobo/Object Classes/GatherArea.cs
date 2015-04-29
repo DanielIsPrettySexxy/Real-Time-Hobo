@@ -7,7 +7,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Real_Time_Hobo.State_Classes;
 using Microsoft.Xna.Framework.Graphics;
-
+using Microsoft.Xna.Framework.Input;
 namespace Real_Time_Hobo.Object_Classes
 {
     class GatherArea
@@ -36,6 +36,10 @@ namespace Real_Time_Hobo.Object_Classes
                 if (a_playerPos.Y > m_hitBox.Y && a_playerPos.Y < (m_hitBox.Y + m_hitBox.Height))
                     return true;
             return false;
+        }
+        public void Update()
+        {
+
         }
         public static void Initialize(Game1 a_gameRef)
         {
